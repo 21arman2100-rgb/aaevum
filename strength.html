@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFlow | Strength Guide</title>
+    <style>
+        :root {
+            --primary-red: #cc0000;
+            --dark-bg: #0a0a0a;
+            --card-bg: #141414;
+            --white: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+
+        /* Fixed Font Issues */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body { 
+            background-color: var(--dark-bg); 
+            color: var(--white); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Cleaner font for readability */
+            line-height: 1.5; 
+        }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; background: #000; border-bottom: 2px solid var(--primary-red);
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        .logo { font-size: 24px; text-decoration: none; color: white; font-weight: 900; text-transform: uppercase; }
+        .logo span { color: var(--primary-red); }
+
+        .hero-title { text-align: center; padding: 40px 20px; }
+        .hero-title h1 { 
+            font-size: clamp(2rem, 8vw, 3.5rem); 
+            text-transform: uppercase; 
+            margin-bottom: 10px;
+            line-height: 1.1; /* Prevents overlapping in large titles */
+        }
+        .hero-title span { color: var(--primary-red); }
+
+        .selector-box { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        
+        .gender-btn {
+            padding: 12px 30px; border: none; cursor: pointer; font-size: 1rem;
+            text-transform: uppercase; font-weight: bold; background: #222; color: #fff;
+            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%);
+            transition: 0.3s;
+        }
+
+        .gender-btn.active { background: var(--primary-red); }
+
+        /* Exercise Grid */
+        .grid-container {
+            display: none; padding: 40px 5%;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .grid-container.active { display: grid; }
+
+        .ex-card {
+            background: var(--card-bg); border: 1px solid #222;
+            display: flex; flex-direction: column;
+            transition: 0.3s; position: relative;
+        }
+
+        .ex-card:hover { border-color: var(--primary-red); }
+
+        .img-box { height: 180px; background: #1a1a1a; overflow: hidden; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+
+        .ex-content { padding: 20px; flex-grow: 1; }
+        .ex-content h3 { 
+            color: var(--white); 
+            text-transform: uppercase; 
+            margin-bottom: 10px; 
+            font-size: 1.3rem; 
+            line-height: 1.2; 
+        }
+        .ex-content p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 15px; }
+        
+        /* YouTube Button Styling */
+        .yt-btn {
+            display: inline-block;
+            background: #ff0000;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: 0.3s;
+            text-align: center;
+        }
+        .yt-btn:hover { background: #b30000; }
+
+        footer { text-align: center; padding: 40px; color: #444; border-top: 1px solid #111; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="HOME.HTML" class="logo">U<span>FC</span></a>
+        <a href="HOME.HTML" style="color:white; text-decoration:none;">HOME</a>
+    </header>
+
+    <div class="hero-title">
+        <h1>STRENGTH <span>EXERCISES</span></h1>
+        <div class="selector-box">
+            <button class="gender-btn active" onclick="switchTab('male', this)">Male (Heavy)</button>
+            <button class="gender-btn" onclick="switchTab('female', this)">Female (Light)</button>
+        </div>
+    </div>
+
+    <div id="male" class="grid-container active"></div>
+    <div id="female" class="grid-container"></div>
+
+    <footer>UFC &copy; 2026</footer>
+
+    <script>
+        // Placeholder YouTube Link: "https://www.youtube.com/results?search_query="
+        const maleData = [
+            { name: "Deadlift", desc: "Builds absolute back and leg power.", video: "https://www.youtube.com/watch?v=op9kVnSso6Q" },
+            { name: "Bench Press", desc: "Classic mass builder for chest and triceps.", video: "#" },
+            { name: "Barbell Squat", desc: "Foundation for leg strength and core.", video: "#" },
+            { name: "Overhead Press", desc: "Builds powerful shoulders and stability.", video: "#" },
+            { name: "Weighted Pull-ups", desc: "Top-tier upper body pulling exercise.", video: "#" },
+            { name: "Barbell Rows", desc: "Targets back thickness and lats.", video: "#" },
+            { name: "Incline DB Press", desc: "Focuses on upper chest definition.", video: "#" },
+            { name: "Leg Press", desc: "Isolation for heavy quad stimulation.", video: "#" },
+            { name: "Romanian Deadlift", desc: "Hamstring and glute power focus.", video: "#" },
+            { name: "Weighted Dips", desc: "Chest and tricep explosive movement.", video: "#" },
+            { name: "Hammer Curls", desc: "Builds bicep and forearm thickness.", video: "#" },
+            { name: "Skull Crushers", desc: "Intense tricep isolation.", video: "#" },
+            { name: "Lat Pulldowns", desc: "Width-building back movement.", video: "#" },
+            { name: "Clean & Press", desc: "Full-body explosive power lift.", video: "#" },
+            { name: "Farmer's Walk", desc: "Unmatched grip and core strength.", video: "#" },
+            { name: "T-Bar Row", desc: "Mid-back thickness specialist.", video: "#" },
+            { name: "Front Squat", desc: "Quad-dominant leg builder.", video: "#" },
+            { name: "Hack Squat", desc: "Deep leg muscle teardrop focus.", video: "#" },
+            { name: "Arnold Press", desc: "Complete shoulder rotation growth.", video: "#" },
+            { name: "Close Grip Bench", desc: "Heavy tricep pressing power.", video: "#" }
+        ];
+
+        const femaleData = [
+            { name: "Glute Bridges", desc: "Primary glute shaping exercise.", video: "https://www.youtube.com/watch?v=wPM8icPu6H8" },
+            { name: "Goblet Squats", desc: "Full depth leg and hip toning.", video: "#" },
+            { name: "Kettlebell Swings", desc: "Fat burn and glute endurance.", video: "#" },
+            { name: "Dumbbell Lunges", desc: "Sculpts thighs and improves balance.", video: "#" },
+            { name: "Incline Pushups", desc: "Tones chest and arms without bulk.", video: "#" },
+            { name: "Plank Hold", desc: "Core tightening and stabilization.", video: "#" },
+            { name: "Sumo Squats", desc: "Inner thigh and glute toning.", video: "#" },
+            { name: "Tricep Kickbacks", desc: "Definition for back of the arms.", video: "#" },
+            { name: "Lateral Raises", desc: "Leans out the shoulders.", video: "#" },
+            { name: "Curtsy Lunges", desc: "Specific targeting for hip shape.", video: "#" },
+            { name: "Bird Dogs", desc: "Core and lower back stability.", video: "#" },
+            { name: "Dead Bugs", desc: "Deep abdominal muscle sculpting.", video: "#" },
+            { name: "Step Ups", desc: "Elevated heart rate and leg toning.", video: "#" },
+            { name: "Mountain Climbers", desc: "High energy fat burning movement.", video: "#" },
+            { name: "Bicep Curls", desc: "Light weights for sleek arm shape.", video: "#" },
+            { name: "Side Planks", desc: "Shapes the waist and obliques.", video: "#" },
+            { name: "Hip Thrusts", desc: "Maximum glute development focus.", video: "#" },
+            { name: "Box Jumps", desc: "Explosive movement for lower body.", video: "#" },
+            { name: "Face Pulls", desc: "Posture correction and shoulder health.", video: "#" },
+            { name: "Cable Kickbacks", desc: "Detailed glute isolation.", video: "#" }
+        ];
+
+        function render(data, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = data.map((ex, i) => `
+                <div class="ex-card">
+                    <div class="img-box">
+                        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400" alt="fit">
+                    </div>
+                    <div class="ex-content">
+                        <h3>${ex.name}</h3>
+                        <p>${ex.desc}</p>
+                        <a href="${ex.video}" target="_blank" class="yt-btn">Watch on YouTube</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function switchTab(gender, btn) {
+            document.querySelectorAll('.grid-container').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(gender).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        render(maleData, 'male');
+        render(femaleData, 'female');
+    </script>
+</body>
+</html>

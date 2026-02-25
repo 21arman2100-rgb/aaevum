@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFlow | Cardio Blast</title>
+    <style>
+        :root {
+            --primary-red: #cc0000;
+            --dark-bg: #0a0a0a;
+            --card-bg: #141414;
+            --white: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body { 
+            background-color: var(--dark-bg); 
+            color: var(--white); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6; 
+        }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; background: #000; border-bottom: 2px solid var(--primary-red);
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        .logo { font-size: 24px; text-decoration: none; color: white; font-weight: 900; text-transform: uppercase; }
+        .logo span { color: var(--primary-red); }
+
+        .hero-title { text-align: center; padding: 40px 20px; }
+        .hero-title h1 { 
+            font-size: clamp(2rem, 8vw, 3.5rem); 
+            text-transform: uppercase; 
+            margin-bottom: 10px;
+            line-height: 1.2; 
+        }
+        .hero-title span { color: var(--primary-red); }
+
+        .selector-box { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        
+        .gender-btn {
+            padding: 12px 30px; border: none; cursor: pointer; font-size: 1rem;
+            text-transform: uppercase; font-weight: bold; background: #222; color: #fff;
+            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%);
+            transition: 0.3s;
+        }
+
+        .gender-btn.active { background: var(--primary-red); }
+
+        /* Exercise Grid */
+        .grid-container {
+            display: none; padding: 40px 5%;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .grid-container.active { display: grid; }
+
+        .ex-card {
+            background: var(--card-bg); border: 1px solid #222;
+            display: flex; flex-direction: column;
+            transition: 0.3s; position: relative;
+        }
+
+        .ex-card:hover { border-color: var(--primary-red); transform: scale(1.02); }
+
+        .img-box { height: 180px; background: #1a1a1a; overflow: hidden; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+
+        .ex-content { padding: 20px; flex-grow: 1; }
+        .ex-content h3 { 
+            color: var(--white); 
+            text-transform: uppercase; 
+            margin-bottom: 10px; 
+            font-size: 1.3rem; 
+        }
+        .ex-content p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 15px; min-height: 45px; }
+        
+        .yt-btn {
+            display: block;
+            background: #ff0000;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 4px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .yt-btn:hover { background: #b30000; }
+
+        footer { text-align: center; padding: 40px; color: #444; border-top: 1px solid #111; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="HOME.HTML" class="logo">U<span>FC</span></a>
+        <a href="HOME.HTML" style="color:white; text-decoration:none; font-weight:bold;">HOME</a>
+    </header>
+
+    <div class="hero-title">
+        <h1>CARDIO <span>ENDURANCE</span></h1>
+        <div class="selector-box">
+            <button class="gender-btn active" onclick="switchTab('male', this)">Male (HIIT)</button>
+            <button class="gender-btn" onclick="switchTab('female', this)">Female (Flow)</button>
+        </div>
+    </div>
+
+    <div id="male" class="grid-container active"></div>
+    <div id="female" class="grid-container"></div>
+
+    <footer>FITFLOW ACADEMY &copy; 2026</footer>
+
+    <script>
+        const maleCardio = [
+            { name: "Sprints", desc: "Max effort running for explosive power.", video: "#" },
+            { name: "Battle Ropes", desc: "High-intensity arm and core cardio.", video: "#" },
+            { name: "Box Jumps", desc: "Plyometric cardio for leg power.", video: "#" },
+            { name: "Burpees", desc: "The ultimate full-body cardio killer.", video: "#" },
+            { name: "Mountain Climbers", desc: "Rapid leg movement for core and heart.", video: "#" },
+            { name: "Assault Bike", desc: "Full-body metabolic conditioning.", video: "#" },
+            { name: "Rowing Machine", desc: "Powerful strokes for total body endurance.", video: "#" },
+            { name: "Jump Rope", desc: "Fast-paced footwork and coordination.", video: "#" },
+            { name: "Stairmaster", desc: "Continuous climbing for leg endurance.", video: "#" },
+            { name: "Shadow Boxing", desc: "Upper body speed and heart rate boost.", video: "#" },
+            { name: "Kettlebell Snatches", desc: "High-rep explosive cardio.", video: "#" },
+            { name: "Sled Pushes", desc: "Heavy weighted cardio for leg drive.", video: "#" },
+            { name: "Tuck Jumps", desc: "High vertical leaps for max effort.", video: "#" },
+            { name: "Bear Crawls", desc: "Functional movement for total body.", video: "#" },
+            { name: "Thrusters", desc: "Lightweight, high-speed full body reps.", video: "#" },
+            { name: "Broad Jumps", desc: "Horizontal power and conditioning.", video: "#" },
+            { name: "Swimming Laps", desc: "Low impact, high resistance cardio.", video: "#" },
+            { name: "Medicine Ball Slams", desc: "Explosive overhead power cardio.", video: "#" },
+            { name: "Jumping Lunges", desc: "Plyometric leg burn and heart rate.", video: "#" },
+            { name: "Speed Skaters", desc: "Lateral movement for agility and heart.", video: "#" }
+        ];
+
+        const femaleCardio = [
+            { name: "Dance Cardio", desc: "High energy movement with rhythm.", video: "#" },
+            { name: "Incline Walking", desc: "Burn fat while protecting joints.", video: "#" },
+            { name: "Pilates Flow", desc: "Dynamic core-focused cardio.", video: "#" },
+            { name: "Cycling", desc: "Consistent pace for heart health.", video: "#" },
+            { name: "Step Aerobics", desc: "Rhythmic stepping for leg toning.", video: "#" },
+            { name: "Power Yoga", desc: "Continuous movement for flexibility.", video: "#" },
+            { name: "Elliptical Trainer", desc: "Smooth, full-body aerobic exercise.", video: "#" },
+            { name: "Swimming (Breaststroke)", desc: "Calorie burning and muscle toning.", video: "#" },
+            { name: "Jogging", desc: "Steady state cardio for fat loss.", video: "#" },
+            { name: "Zumba", desc: "Fun, fast-paced calorie burner.", video: "#" },
+            { name: "Butt Kicks", desc: "Rapid leg movement for hamstrings.", video: "#" },
+            { name: "Side Shuffles", desc: "Lateral movement for hip agility.", video: "#" },
+            { name: "High Knees", desc: "Vertical leg drive for heart rate.", video: "#" },
+            { name: "Jumping Jacks", desc: "The classic full-body warmer.", video: "#" },
+            { name: "Hula Hooping", desc: "Core-focused fun cardio.", video: "#" },
+            { name: "Rowing (Light)", desc: "Steady rhythm for endurance.", video: "#" },
+            { name: "Kickboxing", desc: "Toning arms and legs via striking.", video: "#" },
+            { name: "Barre Cardio", desc: "Small, high-rep toning movements.", video: "#" },
+            { name: "Plank Jacks", desc: "Cardio while holding a strong core.", video: "#" },
+            { name: "Squat Thrusts", desc: "Controlled, high-rep fat burning.", video: "#" }
+        ];
+
+        function render(data, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = data.map((ex, i) => `
+                <div class="ex-card">
+                    <div class="img-box">
+                        <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=400" alt="cardio">
+                    </div>
+                    <div class="ex-content">
+                        <h3>${ex.name}</h3>
+                        <p>${ex.desc}</p>
+                        <a href="${ex.video}" target="_blank" class="yt-btn">Watch on YouTube</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function switchTab(gender, btn) {
+            document.querySelectorAll('.grid-container').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(gender).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        render(maleCardio, 'male');
+        render(femaleCardio, 'female');
+    </script>
+</body>
+</html>

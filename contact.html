@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFlow | Contact Us</title>
+    <style>
+        :root {
+            --primary-red: #cc0000;
+            --dark-bg: #0a0a0a;
+            --card-bg: #141414;
+            --white: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body { 
+            background-color: var(--dark-bg); 
+            color: var(--white); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6; 
+        }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; background: #000; border-bottom: 2px solid var(--primary-red);
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        .logo { font-size: 24px; text-decoration: none; color: white; font-weight: 900; text-transform: uppercase; }
+        .logo span { color: var(--primary-red); }
+
+        .hero-title { text-align: center; padding: 40px 20px; }
+        .hero-title h1 { 
+            font-size: clamp(2rem, 8vw, 3.5rem); 
+            text-transform: uppercase; 
+            margin-bottom: 10px;
+            line-height: 1.2; 
+        }
+        .hero-title span { color: var(--primary-red); }
+
+        /* Contact Layout */
+        .contact-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 20px 8% 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Left Side: Details */
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .info-box {
+            background: var(--card-bg);
+            padding: 30px;
+            border-left: 5px solid var(--primary-red);
+            margin-bottom: 20px;
+        }
+
+        .info-box h3 {
+            color: var(--primary-red);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .info-box p {
+            color: var(--white);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover { color: var(--primary-red); }
+
+        /* Right Side: Form */
+        .contact-form-container {
+            flex: 1.5;
+            min-width: 300px;
+            background: var(--card-bg);
+            padding: 40px;
+            border: 1px solid #222;
+        }
+
+        .contact-form-container h2 {
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: var(--text-gray);
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 4px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary-red);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #b30000;
+            transform: translateY(-2px);
+        }
+
+        footer { text-align: center; padding: 40px; color: #444; border-top: 1px solid #111; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="HOME.HTML" class="logo">U<span>FC</span></a>
+        <a href="HOME.HTML" style="color:white; text-decoration:none; font-weight:bold;">HOME</a>
+    </header>
+
+    <div class="hero-title">
+        <h1>GET IN <span>TOUCH</span></h1>
+        <p style="color: var(--text-gray);">Have questions? We are here to help you reach your goals.</p>
+    </div>
+
+    <div class="contact-wrapper">
+        <div class="contact-info">
+            <div class="info-box">
+                <h3>Our Location</h3>
+                <p>2nd complex,hisar</p>
+                <p>INDIA, Sector 14</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Contact Info</h3>
+                <p><strong>Email:</strong> arman637894@gmail.com</p>
+                <p><strong>Phone:</strong> +91 6378943231</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Social Media</h3>
+                <div class="social-links">
+                    <a href="#">INSTAGRAM</a>
+                    <a href="#">FACEBOOK</a>
+                    <a href="#">TWITTER</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form-container">
+            <h2>Send a Message</h2>
+            <form id="fitForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Interested In</label>
+                    <select>
+                        <option>Strength Training</option>
+                        <option>Cardio Blast</option>
+                        <option>Personal Coaching</option>
+                        <option>BMI Consultation</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea rows="5" placeholder="How can we help you?"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>FITFLOW ACADEMY &copy; 2026</footer>
+
+    <script>
+        document.getElementById('fitForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! Your message has been sent to FitFlow Academy.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

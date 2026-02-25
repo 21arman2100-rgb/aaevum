@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFlow | Nutrition Plans</title>
+    <style>
+        :root {
+            --primary-red: #cc0000;
+            --dark-bg: #0a0a0a;
+            --card-bg: #141414;
+            --white: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: var(--dark-bg); 
+            color: var(--white); 
+            font-family: 'Segoe UI', sans-serif; 
+            line-height: 1.6;
+        }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; background: #000; border-bottom: 2px solid var(--primary-red);
+        }
+        .logo { font-size: 24px; text-decoration: none; color: white; font-weight: 900; text-transform: uppercase; }
+        .logo span { color: var(--primary-red); }
+
+        .hero-title { text-align: center; padding: 40px 20px; }
+        .hero-title h1 { font-size: 3rem; text-transform: uppercase; line-height: 1.1; }
+        .hero-title span { color: var(--primary-red); }
+
+        /* Selection Controls */
+        .controls {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #222;
+        }
+
+        .step { margin-bottom: 30px; text-align: center; }
+        .step h3 { margin-bottom: 15px; text-transform: uppercase; color: var(--text-gray); font-size: 14px; letter-spacing: 2px; }
+
+        .btn-group { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        
+        .choice-btn {
+            padding: 12px 25px; border: 1px solid #444; background: #222;
+            color: white; cursor: pointer; font-weight: bold; text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .choice-btn.active { background: var(--primary-red); border-color: var(--primary-red); }
+
+        /* Diet Display Area */
+        #diet-result {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .meal-card {
+            background: var(--card-bg);
+            margin-bottom: 15px;
+            padding: 20px;
+            border-left: 4px solid var(--primary-red);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .meal-time { color: var(--primary-red); font-weight: bold; text-transform: uppercase; width: 120px; }
+        .meal-desc { flex-grow: 1; padding-left: 20px; font-size: 1.1rem; }
+
+        footer { text-align: center; padding: 40px; color: #444; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="HOME.HTML" class="logo">U<span>FC</span></a>
+        <a href="HOME.HTML" style="color:white; text-decoration:none; font-weight:bold;">HOME</a>
+    </header>
+
+    <div class="hero-title">
+        <h1>FUEL YOUR <span>GOALS</span></h1>
+        <p>Precision Nutrition for Peak Performance</p>
+    </div>
+
+    <section class="controls">
+        <div class="step">
+            <h3>Step 1: Choose Diet Type</h3>
+            <div class="btn-group">
+                <button class="choice-btn active" onclick="setDiet('veg', this)">Vegetarian</button>
+                <button class="choice-btn" onclick="setDiet('nonveg', this)">Non-Vegetarian</button>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Choose Your Goal</h3>
+            <div class="btn-group">
+                <button class="choice-btn active" onclick="setGoal('mass', this)">Mass Gain</button>
+                <button class="choice-btn" onclick="setGoal('strength', this)">Strength</button>
+                <button class="choice-btn" onclick="setGoal('cutting', this)">Cutting</button>
+                <button class="choice-btn" onclick="setGoal('fatloss', this)">Fat Loss</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="diet-result">
+        </div>
+
+    <footer>FITFLOW ACADEMY &copy; 2026</footer>
+
+    <script>
+        let currentDiet = 'veg';
+        let currentGoal = 'mass';
+
+        const plans = {
+            veg: {
+                mass: ["Oats with Milk & Nuts", "Paneer & Brown Rice", "Peanut Butter Toast", "Chickpea Curry & Roti", "Greek Yogurt & Fruit"],
+                strength: ["Soya Chunks & Quinoa", "Lentil Soup & Sweet Potato", "Protein Shake & Almonds", "Tofu Stir-fry", "Casein Shake"],
+                cutting: ["Sprouted Salad", "Boiled Broccoli & Dal", "Green Tea & Walnuts", "Grilled Paneer Salad", "Low-fat Curd"],
+                fatloss: ["Lemon Water & Seeds", "Vegetable Soup", "Apple & Cinnamon", "Clear Dal Soup", "Cucumber Salad"]
+            },
+            nonveg: {
+                mass: ["Eggs & Whole Grain Bread", "Chicken Breast & Pasta", "Banana Shake", "Salmon & White Rice", "Boiled Eggs"],
+                strength: ["Omelette with Cheese", "Steak & Baked Potato", "Beef Jerky or Shake", "Chicken Thighs & Rice", "Casein Shake"],
+                cutting: ["Egg Whites & Spinach", "Grilled Fish & Greens", "Black Coffee", "Chicken Salad", "Steamed Fish"],
+                fatloss: ["Warm Lemon Water", "Boiled Chicken & Veggies", "Grapefruit", "Egg White Scramble", "Clear Chicken Broth"]
+            }
+        };
+
+        function setDiet(type, btn) {
+            currentDiet = type;
+            updateButtons(btn, 'Step 1');
+            updateDisplay();
+        }
+
+        function setGoal(goal, btn) {
+            currentGoal = goal;
+            updateButtons(btn, 'Step 2');
+            updateDisplay();
+        }
+
+        function updateButtons(clickedBtn, step) {
+            const parent = clickedBtn.parentElement;
+            parent.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('active'));
+            clickedBtn.classList.add('active');
+        }
+
+        function updateDisplay() {
+            const resultDiv = document.getElementById('diet-result');
+            const dietArray = plans[currentDiet][currentGoal];
+            const times = ["Breakfast", "Lunch", "Snack", "Dinner", "Night"];
+
+            let html = `<h2 style="text-align:center; margin-bottom:20px; text-transform:uppercase;">${currentDiet} Plan for ${currentGoal}</h2>`;
+            
+            dietArray.forEach((meal, index) => {
+                html += `
+                    <div class="meal-card">
+                        <div class="meal-time">${times[index]}</div>
+                        <div class="meal-desc">${meal}</div>
+                    </div>
+                `;
+            });
+            
+            resultDiv.innerHTML = html;
+        }
+
+        function updateButtons(btn, step) {
+            const btns = btn.closest('.step').querySelectorAll('.choice-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        // Initial Load
+        updateDisplay();
+    </script>
+</body>
+</html>
